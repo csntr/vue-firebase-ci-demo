@@ -1,7 +1,8 @@
 const firebase = require('@firebase/rules-unit-testing');
-const { loadFirestoreRules, initializeTestApp, clearFirestoreData } = firebase;
 const { readFileSync } = require('fs');
 const path = require('path');
+
+const { loadFirestoreRules, initializeTestApp, clearFirestoreData } = firebase;
 
 module.exports.setup = async (auth, data) => {
   const projectId = 'test-app';
