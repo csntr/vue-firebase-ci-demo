@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "cy:open": "node_modules/.bin/cypress open",
+    "cy:run": "CYPRESS_BASE_URL=http://localhost:3021 node_modules/.bin/cypress run",
+    "lint": "eslint ."
   },
   "dependencies": {
     "firebase": "^8.8.0",
@@ -13,9 +16,12 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.0.5",
+    "cypress": "^8.2.0",
     "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.14.0",
     "jest": "^27.0.6",
+    "prettier": "^2.3.2",
     "vite": "^2.4.3"
   }
 }
