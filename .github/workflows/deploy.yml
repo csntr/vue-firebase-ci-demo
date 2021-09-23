@@ -36,9 +36,9 @@ jobs:
         run: npm run build
 
       - name: Cypress run
-        working-directory: ./client
-        uses: cypress-io/github-action@v2.11.7
+        uses: cypress-io/github-action@v2
         with:
+          project: ./client
           browser: chrome
           build: npm run build        
           start: npm run serve:emulator
