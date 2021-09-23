@@ -6,26 +6,56 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Test and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Setup node
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+
       - name: Install dependencies for functions
         working-directory: ./functions
         run: npm ci
+
       - name: Install dependencies for client
         working-directory: ./client
         run: npm ci
-      - name: Run integration tests against emulator
+
+      - name: Run firestore rule tests against emulator
         working-directory: ./functions
         run: |
           npm install -g firebase-tools
           firebase emulators:exec --only firestore "npm run test:rules"
-      # - name: Build client
-      #   working-directory: ./client
-      #   run: npm run build
+
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
+
+      - name: Archive production artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: dist
+          path: ./client/dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download artifact
+        uses: actions/download-artifact@main
+        with:
+          name: dist
+          path: dist
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env: 
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
