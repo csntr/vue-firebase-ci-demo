@@ -23,6 +23,13 @@ jobs:
         run: npm ci
       # - name: Run cypress E2E tests
       #   run: npm run test:e2e:ci
-      - name: Build client
-        working-directory: ./client
-        run: npm run build
+      - name: Test to Firebase
+        working-directory: ./functions
+        uses: w9jds/firebase-action@master
+        with:
+          args: emulators:exec --only firestore \"npm run test:rules\"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      # - name: Build client
+      #   working-directory: ./client
+      #   run: npm run build
