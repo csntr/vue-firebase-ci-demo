@@ -1,11 +1,16 @@
 <template>
   <h1>CI testing app</h1>
-  <button>Login</button>
+  <pre>{{ count }}</pre>
+  <button @click="inc()">inc</button>
 </template>
 
 <script setup>
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
+import { ref } from 'vue'
+
+const count = ref(0)
+const inc = () => {
+  count.value++
+}
 </script>
 
 <style>

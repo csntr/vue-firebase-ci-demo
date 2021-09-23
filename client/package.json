@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "dev:emulator": "firebase emulators:exec 'npm run dev' --ui",
     "build": "vite build",
     "serve": "vite preview",
-    "cy:open": "node_modules/.bin/cypress open",
-    "cy:run": "CYPRESS_BASE_URL=http://localhost:3021 node_modules/.bin/cypress run",
+    "serve:emulator": "firebase emulators:exec 'npm run serve'",
+    "cy:open": "CYPRESS_BASE_URL=http://localhost:8085 node_modules/.bin/cypress open",
+    "cy:run": "node_modules/.bin/cypress run",
     "lint": "eslint ."
   },
   "dependencies": {

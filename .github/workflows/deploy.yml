@@ -35,6 +35,13 @@ jobs:
         working-directory: ./client
         run: npm run build
 
+      - name: Cypress run
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          browser: chrome
+          build: npm run build        
+          start: npm run serve:emulator
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
