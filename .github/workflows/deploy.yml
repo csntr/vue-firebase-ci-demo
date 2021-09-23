@@ -40,7 +40,6 @@ jobs:
         with:
           project: ./client
           browser: chrome
-          build: npm run build        
           start: npm run serve:emulator
 
       - name: Deploy to Firebase
