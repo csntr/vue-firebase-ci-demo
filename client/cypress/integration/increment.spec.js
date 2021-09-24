@@ -7,8 +7,8 @@ describe('Increment test', () => {
     cy.get('pre').should('have.text', 0)
   })
 
-  it('increments by 2', () => {
+  it('increments by 1', () => {
     cy.get('button').click()
-    cy.get('pre').should('have.text', 2)
+    cy.get('pre').should('have.text', 1)
   })
 })
